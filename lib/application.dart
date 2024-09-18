@@ -85,6 +85,7 @@ class ApplicationState extends State<Application> {
     super.initState();
     _initTimer();
     globalState.appController = AppController(context);
+    globalState.measure = Measure.of(context);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       final currentContext = globalState.navigatorKey.currentContext;
       if (currentContext != null) {
@@ -179,9 +180,7 @@ class ApplicationState extends State<Application> {
                       GlobalWidgetsLocalizations.delegate
                     ],
                     builder: (_, child) {
-                      return MediaManager(
-                        child: _buildPage(child!),
-                      );
+                      return _buildPage(child!);
                     },
                     scrollBehavior: BaseScrollBehavior(),
                     title: appName,
